@@ -319,7 +319,7 @@
   }
 </style>
 </head>
-<body data-phase="insulator">
+<body data-phase="semiconductor">
 
 <div class="app-layout">
   
@@ -348,7 +348,7 @@
           <span id="phaseLabel">Monoclinic (M&#8321;)</span>
         </div>
         <div class="stage-readout" id="tempReadout">
-          25&deg;C <span>/ Insulating State</span>
+          25&deg;C <span>/ Semiconducting State</span>
         </div>
         <div class="slider-wrap">
           <input type="range" min="20" max="90" value="25" class="temp-slider" id="tempSlider" aria-label="Temperature Stage Controller">
@@ -385,7 +385,7 @@
       Engineering the atomic lattice of <span>vanadium dioxide (VO&#8322;) thin films</span> — modulating chemical strain and dopant chemistry to tune the semiconductor&ndash;to&ndash;metal transition for energy-efficient smart windows.
     </div>
     <p class="hero-sub">
-      Working within the laboratory of <a href="https://functfilm.es.hokudai.ac.jp/english/member/%E5%A4%AA%E7%94%B0-%E8%A3%95%E9%81%93/" target="_blank" rel="noopener">Prof. Hiromichi Ohta</a> at RIES. My research bridges RF magnetron sputtering and wet-chemical synthesis with first-principles Density Functional Theory (DFT) utilizing VASP and Quantum ESPRESSO to correlate synthesis conditions with structure, defects, and functional properties in inorganic oxide systems.
+      Working in the laboratory of <a href="https://functfilm.es.hokudai.ac.jp/english/member/%E5%A4%AA%E7%94%B0-%E8%A3%95%E9%81%93/" target="_blank" rel="noopener">Prof. Hiromichi Ohta</a> at RIES. My research bridges RF magnetron sputtering with first-principles Density Functional Theory (DFT) utilizing VASP and Quantum ESPRESSO to correlate synthesis conditions with structure, defects, and functional properties in inorganic oxide systems.
     </p>
 
     <!-- SECTION 01: ACADEMIC LINEAGE -->
@@ -725,7 +725,7 @@
     const isMetal = temp >= 68;
 
     // Update phase theme attributes
-    body.setAttribute('data-phase', isMetal ? 'metal' : 'insulator');
+    body.setAttribute('data-phase', isMetal ? 'metal' : 'semiconductor');
 
     // Update real-time text readouts
     if (isMetal) {
@@ -734,7 +734,7 @@
       bandgap.innerHTML = '0.00 eV (Conductor)';
       irTrans.innerHTML = 'Reflected (< 10%)';
     } else {
-      readout.innerHTML = `${temp}&deg;C <span>/ Insulating State</span>`;
+      readout.innerHTML = `${temp}&deg;C <span>/ Semiconducting State</span>`;
       phaseLabel.innerHTML = 'Monoclinic (M&#8321;)';
       bandgap.innerHTML = '~0.60 eV';
       irTrans.innerHTML = 'High (85%)';
