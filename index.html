@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Mayank Dotiyal — Materials & Phase Transition Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* PHASE 1: MONOCLINIC (Deep Vacuum / Infrared Transparent) */
+    --bg: #0c0d12;
+    --bg-panel: #13151d;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-card-hover: rgba(255, 255, 255, 0.06);
+    --text-main: #f0f2f8;
+    --text-muted: #8c93a8;
+    --text-dim: #565d70;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-highlight: rgba(255, 255, 255, 0.18);
+    --accent: #ff7b00;
+    --accent-glow: rgba(255, 123, 0, 0.15);
+    --accent-gradient: linear-gradient(135deg, #ff7b00, #ffba00);
+    --tag-bg: rgba(255, 123, 0, 0.1);
+    --tag-border: rgba(255, 123, 0, 0.3);
+    --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    
+    /* Typography */
+    --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* PHASE 2: RUTILE (Anodized Silver / Infrared Reflective) */
+  body[data-phase="metal"] {
+    --bg: #e6ebf2;
+    --bg-panel: #f3f6fa;
+    --bg-card: rgba(255, 255, 255, 0.7);
+    --bg-card-hover: rgba(255, 255, 255, 0.95);
+    --text-main: #0f141d;
+    --text-muted: #525f75;
+    --text-dim: #8896ac;
+    --border: rgba(15, 20, 29, 0.1);
+    --border-highlight: rgba(15, 20, 29, 0.25);
+    --accent: #0055ff;
+    --accent-glow: rgba(0, 85, 255, 0.12);
+    --accent-gradient: linear-gradient(135deg, #0055ff, #00d5ff);
+    --tag-bg: rgba(0, 85, 255, 0.08);
+    --tag-border: rgba(0, 85, 255, 0.25);
+    --shadow: 0 20px 40px -15px rgba(15, 20, 29, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    transition: background-color var(--transition-smooth), color var(--transition-smooth);
+    overflow-x: hidden;
+  }
+
+  /* Ambient Cleanroom Grid */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    opacity: 0.5;
+    transition: opacity var(--transition-smooth);
+  }
+
+  ::selection { background: var(--accent); color: #fff; }
+  a { color: inherit; text-decoration: none; transition: var(--transition-fast); }
+
+  /* ==========================================================================
+     LAYOUT ARCHITECTURE: SIDEBAR + MAIN CANVAS
+     ========================================================================== */
+  .app-layout {
+    display: flex; min-height: 100vh;
+  }
+
+  /* LEFT SIDEBAR: TELEMETRY & IDENTITY */
+  .sidebar {
+    width: 360px; height: 100vh; position: sticky; top: 0;
+    background: var(--bg-panel); border-right: 1px solid var(--border);
+    padding: 40px 32px; display: flex; flex-direction: column; justify-content: space-between;
+    z-index: 100; transition: background-color var(--transition-smooth), border-color var(--transition-smooth);
+  }
+
+  .identity .status-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; border-radius: 20px; font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+    background: var(--tag-bg); border: 1px solid var(--tag-border); color: var(--accent);
+    margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .status-pill .indicator {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .identity h1 {
+    font-family: var(--font-heading); font-size: 32px; font-weight: 700;
+    line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 12px;
+  }
+  .identity p { font-size: 14.5px; color: var(--text-muted); line-height: 1.5; }
+  .identity .inst { margin-top: 12px; font-weight: 600; color: var(--text-main); font-size: 13.5px; }
+
+  /* Navigation Links inside Sidebar */
+  .nav-menu { list-style: none; margin: 32px 0; display: flex; flex-direction: column; gap: 8px; }
+  .nav-menu a {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px; border-radius: 8px; font-weight: 500; font-size: 14px;
+    color: var(--text-muted); border: 1px solid transparent;
+  }
+  .nav-menu a:hover {
+    color: var(--text-main); background: var(--bg-card); border-color: var(--border);
+    transform: translateX(4px);
+  }
+  .nav-menu a span { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
+
+  /* TELEMETRY STAGE CONTROLLER (Interactive Slider) */
+  .telemetry-stage {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; position: relative; overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .telemetry-header {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;
+  }
+  .stage-readout {
+    font-family: var(--font-mono); font-size: 24px; font-weight: 600;
+    color: var(--accent); margin-bottom: 16px; display: flex; align-items: baseline; gap: 8px;
+  }
+  .stage-readout span { font-size: 12px; font-weight: 400; color: var(--text-muted); }
+
+  /* Custom Slider Styling */
+  .slider-wrap { position: relative; margin-bottom: 16px; }
+  .temp-slider {
+    -webkit-appearance: none; width: 100%; height: 6px; border-radius: 3px;
+    background: var(--border-highlight); outline: none; cursor: pointer;
+  }
+  .temp-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--text-main); border: 3px solid var(--accent);
+    cursor: grab; transition: transform 0.1s ease;
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+  .temp-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.2); }
+  
+  .telemetry-metrics {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    padding-top: 12px; border-top: 1px dashed var(--border);
+  }
+  .metric { font-family: var(--font-mono); font-size: 11px; }
+  .metric-label { color: var(--text-dim); display: block; }
+  .metric-value { font-weight: 600; color: var(--text-main); }
+
+  .sidebar-footer { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
+  .social-links { display: flex; gap: 12px; margin-bottom: 8px; }
+  .social-links a { color: var(--text-muted); text-decoration: underline; text-underline-offset: 4px; }
+  .social-links a:hover { color: var(--accent); }
+
+  /* ==========================================================================
+     MAIN SCROLLING CANVAS
+     ========================================================================== */
+  .main-canvas {
+    flex: 1; padding: 64px 80px; max-width: 1200px;
+  }
+
+  /* Editorial Hero Statement */
+  .hero-statement {
+    font-family: var(--font-heading); font-size: clamp(32px, 4vw, 48px);
+    font-weight: 600; line-height: 1.15; letter-spacing: -1px;
+    margin-bottom: 40px; max-width: 800px;
+  }
+  .hero-statement span {
+    background: var(--accent-gradient); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; display: inline;
+  }
+
+  .section-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin: 80px 0 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+  }
+  .section-head h2 { font-family: var(--font-heading); font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+  .section-head .idx { font-family: var(--font-mono); font-size: 13px; color: var(--accent); }
+
+  /* BENTO GRID (Research Focus) */
+  .bento-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  .bento-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px; transition: var(--transition-smooth);
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden; backdrop-filter: blur(10px);
+  }
+  .bento-card:hover {
+    background: var(--bg-card-hover); border-color: var(--border-highlight);
+    transform: translateY(-4px); box-shadow: var(--shadow);
+  }
+  .bento-card.span-2 { grid-column: span 2; }
+  @media (max-width: 1100px) { .bento-card.span-2, .bento-card { grid-column: span 3; } }
+
+  .bento-tag {
+    font-family: var(--font-mono); font-size: 11px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; display: block;
+  }
+  .bento-card h3 { font-family: var(--font-heading); font-size: 22px; margin-bottom: 12px; font-weight: 600; }
+  .bento-card p { font-size: 14.5px; color: var(--text-muted); line-height: 1.6; }
+  .bento-footer { margin-top: 24px; padding-top: 16px; border-top: 1px dashed var(--border); font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
+
+  /* GRAPHICAL ABSTRACTS (Sleek Visual Showcase) */
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
+  }
+  .gallery-item {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+    overflow: hidden; transition: var(--transition-smooth);
+  }
+  .gallery-item:hover { border-color: var(--border-highlight); transform: translateY(-4px); }
+  .gallery-img {
+    aspect-ratio: 16/10; background: var(--bg-panel); display: flex;
+    align-items: center; justify-content: center; position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .gallery-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .gallery-item:hover .gallery-img img { transform: scale(1.05); }
+  .gallery-img .placeholder { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
+  .gallery-caption { padding: 20px; font-size: 14px; font-weight: 500; color: var(--text-main); }
+
+  /* PUBLICATIONS LIST */
+  .pub-group-title {
+    font-family: var(--font-mono); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--text-dim); margin: 32px 0 16px;
+  }
+  .pub-list { display: flex; flex-direction: column; gap: 12px; }
+  .pub-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px; transition: var(--transition-fast); display: flex;
+    justify-content: space-between; align-items: flex-start; gap: 24px;
+  }
+  .pub-card:hover {
+    background: var(--bg-card-hover); border-color: var(--border-highlight);
+    transform: translateX(6px);
+  }
+  .pub-main .year { font-family: var(--font-mono); font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 6px; display: block; }
+  .pub-main h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; line-height: 1.4; color: var(--text-main); }
+  .pub-main .venue { font-size: 13.5px; color: var(--text-muted); }
+  
+  .doi-btn {
+    flex: 0 0 auto; font-family: var(--font-mono); font-size: 11px;
+    padding: 8px 14px; border-radius: 20px; border: 1px solid var(--border-highlight);
+    color: var(--text-main); background: transparent; white-space: nowrap;
+  }
+  .doi-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* TECHNICAL ARSENAL (Categorized Badges) */
+  .arsenal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .arsenal-category h4 { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 12px; }
+  .badge-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tech-badge {
+    padding: 8px 14px; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--text-muted);
+    transition: var(--transition-fast);
+  }
+  .tech-badge:hover { color: var(--text-main); border-color: var(--accent); background: var(--tag-bg); }
+
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 1024px) {
+    .app-layout { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border); padding: 32px 24px; }
+    .main-canvas { padding: 40px 24px; }
+    .bento-grid { grid-template-columns: 1fr; }
+    .bento-card.span-2 { grid-column: span 1; }
+  }
+</style>
+</head>
+<body data-phase="insulator">
+
+<div class="app-layout">
+  
+  <!-- LEFT SIDEBAR: IDENTITY & TELEMETRY CONTROLS -->
+  <aside class="sidebar">
+    <div>
+      <div class="identity">
+        <div class="status-pill"><span class="indicator"></span> Active Researcher</div>
+        <h1>Dr. Mayank Dotiyal</h1>
+        <p>Ph.D. in Materials Engineering. Specializing in thin-film synthesis, chemical strain engineering, and ab initio optoelectronic modeling.</p>
+        <div class="inst">RIES &middot; Hokkaido University, Japan</div>
+      </div>
+
+      <ul class="nav-menu">
+        <li><a href="#research">Research Focus <span>01</span></a></li>
+        <li><a href="#abstracts">Visual Abstracts <span>02</span></a></li>
+        <li><a href="#publications">Publications <span>03</span></a></li>
+        <li><a href="#arsenal">Technical Arsenal <span>04</span></a></li>
+      </ul>
+
+      <!-- THE INTERACTIVE THERMAL STAGE -->
+      <div class="telemetry-stage">
+        <div class="telemetry-header">
+          <span>Thermal Stage Controller</span>
+          <span id="phaseLabel">Monoclinic (M&#8321;)</span>
+        </div>
+        <div class="stage-readout" id="tempReadout">
+          25&deg;C <span>/ Insulating State</span>
+        </div>
+        <div class="slider-wrap">
+          <input type="range" min="20" max="90" value="25" class="temp-slider" id="tempSlider" aria-label="Temperature Stage Controller">
+        </div>
+        <div class="telemetry-metrics">
+          <div class="metric">
+            <span class="metric-label">Bandgap ($E_g$)</span>
+            <span class="metric-value" id="metricBandgap">~0.60 eV</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">IR Transmission</span>
+            <span class="metric-value" id="metricIR">High (85%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a href="mailto:mayankd@iitgn.ac.in">Email</a>
+        <a href="https://scholar.google.com/citations?user=yLHQRygAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://www.linkedin.com/in/mayank-dotiyal/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.researchgate.net/profile/Mayank-Dotiyal-2" target="_blank" rel="noopener">ResearchGate</a>
+      </div>
+      <div>&copy; 2026 Mayank Dotiyal &middot; Sapporo, Japan</div>
+    </div>
+  </aside>
+
+  <!-- MAIN SCROLLING EDITORIAL CANVAS -->
+  <main class="main-canvas">
+    
+    <div class="hero-statement">
+      Engineering the atomic lattice of <span>vanadium dioxide (VO&#8322;)</span> to modulate structural phase transitions for intelligent infrared glazing and sustainable energy architectures.
+    </div>
+
+    <!-- SECTION 01: BENTO GRID RESEARCH -->
+    <section id="research">
+      <div class="section-head">
+        <span class="idx">01</span>
+        <h2>Research Matrix</h2>
+      </div>
+      <div class="bento-grid">
+        <div class="bento-card span-2">
+          <div>
+            <span class="bento-tag">Doctoral Dissertation &middot; IIT Gandhinagar</span>
+            <h3>Chemical Strain-Induced Structural MIT in VO&#8322;</h3>
+            <p>Substituted V&#8308;&#8314; lattice sites with larger-radius, higher-valency cationic dopants to depress the transition temperature toward near-room-temperature levels. Synthesized via RF magnetron sputtering and elucidated through first-principles DFT across strained M&#8321;/R polymorphs.</p>
+          </div>
+          <div class="bento-footer">Outcomes: 3 Peer-Reviewed Papers &middot; 2 Indian Patents</div>
+        </div>
+
+        <div class="bento-card">
+          <div>
+            <span class="bento-tag">Applied Technology</span>
+            <h3>Thermochromic Smart Glazing</h3>
+            <p>Translating doped VO&#8322; films into visibly transparent, high-stability infrared shielding coatings for energy-efficient architecture.</p>
+          </div>
+          <div class="bento-footer">Grant: Tata Steel MaterialNEXT4.0</div>
+        </div>
+
+        <div class="bento-card">
+          <div>
+            <span class="bento-tag">Ab Initio Theory</span>
+            <h3>First-Principles DFT</h3>
+            <p>Modeling thermodynamic stability, formation energies, and electronic density of states (VASP, Quantum ESPRESSO) to map orbital dynamics.</p>
+          </div>
+          <div class="bento-footer">Core Focus: Electronic Band Modulation</div>
+        </div>
+
+        <div class="bento-card span-2">
+          <div>
+            <span class="bento-tag">Postdoctoral Research &middot; Hokkaido University</span>
+            <h3>Functional Oxide Thin Films &amp; Device Integration</h3>
+            <p>Currently advancing the frontier of functional transition-metal oxide coatings at the Research Institute for Electronic Science (RIES) under Prof. Hiromichi Ohta. Exploring thermal conductivity, epitaxial strain, and carrier transport in correlated electron systems.</p>
+          </div>
+          <div class="bento-footer">Affiliation: Ohta Research Group &middot; Sapporo, Japan</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 02: GRAPHICAL ABSTRACTS GALLERY -->
+    <section id="abstracts">
+      <div class="section-head">
+        <span class="idx">02</span>
+        <h2>Visual Abstracts</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <div class="gallery-img">
+            <img src="images/jalcom-26.png" alt="JALLCOM 2026" onerror="this.parentElement.innerHTML='<span class=\'placeholder\'>[Image: jalcom-26.png]</span>'">
+          </div>
+          <div class="gallery-caption">Dopant-induced variation in electronic structure, crystal lattice, and electrical properties in VO&#8322;</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-img">
+            <img src="images/apsus-25.png" alt="Applied Surface Science 2026" onerror="this.parentElement.innerHTML='<span class=\'placeholder\'>[Image: apsus-25.png]</span>'">
+          </div>
+          <div class="gallery-caption">Designing optically transparent heat-insulation coatings through chemical strain modulation</div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-img">
+            <img src="images/ceri-24.png" alt="Ceramics International 2024" onerror="this.parentElement.innerHTML='<span class=\'placeholder\'>[Image: ceri-24.png]</span>'">
+          </div>
+          <div class="gallery-caption">Fabricating highly stable and reliable VO&#8322; thin films via RF magnetron sputtering</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 03: PUBLICATIONS & PATENTS -->
+    <section id="publications">
+      <div class="section-head">
+        <span class="idx">03</span>
+        <h2>Selected Output</h2>
+      </div>
+      
+      <div class="pub-group-title">Journal Articles</div>
+      <div class="pub-list">
+        <div class="pub-card">
+          <div class="pub-main">
+            <span class="year">2026 &middot; Journal of Alloys and Compounds</span>
+            <h4>Dopant induced variation in electronic structure, crystal structure, and electrical properties in VO&#8322;: Correlation between theory and experiment</h4>
+            <div class="venue">Vol. 1074, 189095</div>
+          </div>
+          <a href="https://doi.org/10.1016/j.jallcom.2026.189095" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-main">
+            <span class="year">2026 &middot; Applied Surface Science</span>
+            <h4>Designing optically transparent heat insulation coating through chemical strain modulation</h4>
+            <div class="venue">Vol. 716, 164660</div>
+          </div>
+          <a href="https://doi.org/10.1016/j.apsusc.2025.164660" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-main">
+            <span class="year">2024 &middot; Ceramics International</span>
+            <h4>Fabricating highly stable and reliable vanadium dioxide thin films: Insights from radio frequency magnetron sputtering</h4>
+            <div class="venue">Vol. 50 (22), Part C, 48234&ndash;48245</div>
+          </div>
+          <a href="https://doi.org/10.1016/j.ceramint.2024.09.173" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
+        </div>
+        
+        <div class="pub-card">
+          <div class="pub-main">
+            <span class="year">2025 &middot; Journal of Alloys and Compounds</span>
+            <h4>Microchemical induced magnetic changes in thermally oxidized Sm&#8322;(Co, Fe, Cu, Zr)&#8321;&#8327; alloys</h4>
+            <div class="venue">Vol. 1027, 180608</div>
+          </div>
+          <a href="https://doi.org/10.1016/j.jallcom.2025.180608" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
+        </div>
+      </div>
+
+      <div class="pub-group-title">Intellectual Property</div>
+      <div class="pub-list">
+        <div class="pub-card">
+          <div class="pub-main">
+            <span class="year">2025 Patent &middot; Indian Patent Office</span>
+            <h4>Method of visibly-transparent heat-insulation coating and coated substrate obtained therefrom</h4>
+            <div class="venue">Application No. 202521063654 &middot; Filed July 2025</div>
+          </div>
+          <span class="doi-btn" style="border-color: transparent; color: var(--accent);">Filed</span>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-main">
+            <span class="year">2023 Patent &middot; Indian Patent Office</span>
+            <h4>A process for thermochromic coating</h4>
+            <div class="venue">Application No. 202321024764 &middot; Filed March 2023</div>
+          </div>
+          <span class="doi-btn" style="border-color: transparent; color: var(--accent);">Filed</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 04: TECHNICAL ARSENAL -->
+    <section id="arsenal">
+      <div class="section-head">
+        <span class="idx">04</span>
+        <h2>Technical Arsenal</h2>
+      </div>
+      <div class="arsenal-grid">
+        <div class="arsenal-category">
+          <h4>Synthesis &amp; Deposition</h4>
+          <div class="badge-cloud">
+            <span class="tech-badge">RF Magnetron Sputtering</span>
+            <span class="tech-badge">Spin Coating</span>
+            <span class="tech-badge">Wet-Chemical Synthesis</span>
+            <span class="tech-badge">Thin Film Growth</span>
+            <span class="tech-badge">Sol-Gel Processing</span>
+          </div>
+        </div>
+
+        <div class="arsenal-category">
+          <h4>Diffraction &amp; Spectroscopy</h4>
+          <div class="badge-cloud">
+            <span class="tech-badge">In Situ T-Dependent GI-XRD</span>
+            <span class="tech-badge">X-Ray Reflectivity (XRR)</span>
+            <span class="tech-badge">XPS Peak Fitting</span>
+            <span class="tech-badge">UV-Vis-NIR Spectrophotometry</span>
+            <span class="tech-badge">FTIR Spectroscopy</span>
+            <span class="tech-badge">Ellipsometry</span>
+          </div>
+        </div>
+
+        <div class="arsenal-category">
+          <h4>Microscopy &amp; Transport</h4>
+          <div class="badge-cloud">
+            <span class="tech-badge">TEM / STEM / HRTEM</span>
+            <span class="tech-badge">SEM / EDS Analysis</span>
+            <span class="tech-badge">Atomic Force Microscopy (AFM)</span>
+            <span class="tech-badge">4-Probe Hall Effect</span>
+            <span class="tech-badge">PPMS Transport</span>
+            <span class="tech-badge">Surface Profilometry</span>
+          </div>
+        </div>
+
+        <div class="arsenal-category">
+          <h4>Ab Initio Computation</h4>
+          <div class="badge-cloud">
+            <span class="tech-badge">First-Principles DFT</span>
+            <span class="tech-badge">VASP</span>
+            <span class="tech-badge">Quantum ESPRESSO</span>
+            <span class="tech-badge">Band Structure Modeling</span>
+            <span class="tech-badge">INCAR Optimization</span>
+            <span class="tech-badge">Python Scientific Stack</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // THE THERMAL STAGE TELEMETRY CONTROLLER
+  const slider = document.getElementById('tempSlider');
+  const readout = document.getElementById('tempReadout');
+  const phaseLabel = document.getElementById('phaseLabel');
+  const bandgap = document.getElementById('metricBandgap');
+  const irTrans = document.getElementById('metricIR');
+  const body = document.body;
+
+  function updateStage() {
+    const temp = parseInt(slider.value, 10);
+    const isMetal = temp >= 68;
+
+    // Update phase theme attributes
+    body.setAttribute('data-phase', isMetal ? 'metal' : 'insulator');
+
+    // Update real-time text readouts
+    if (isMetal) {
+      readout.innerHTML = `${temp}&deg;C <span>/ Metallic State</span>`;
+      phaseLabel.innerHTML = 'Tetragonal Rutile (R)';
+      bandgap.innerHTML = '0.00 eV (Conductor)';
+      irTrans.innerHTML = 'Reflected (< 10%)';
+    } else {
+      readout.innerHTML = `${temp}&deg;C <span>/ Insulating State</span>`;
+      phaseLabel.innerHTML = 'Monoclinic (M&#8321;)';
+      bandgap.innerHTML = '~0.60 eV';
+      irTrans.innerHTML = 'High (85%)';
+    }
+  }
+
+  slider.addEventListener('input', updateStage);
+  
+  // Smooth scroll links offset for mobile
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
