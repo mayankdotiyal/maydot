@@ -282,6 +282,8 @@
     font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
   }
   .pub-main h4 { font-size: 15.5px; font-weight: 600; margin-bottom: 6px; line-height: 1.45; color: var(--text-main); }
+  .pub-main .authors { font-size: 13px; color: var(--text-dim); margin: 2px 0 6px; }
+  .pub-main .authors .me { color: var(--text-main); font-weight: 600; }
   .pub-main .venue { font-size: 13.5px; color: var(--text-muted); }
   
   .status-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
@@ -571,10 +573,13 @@
         </div>
       </div>
 
+      <div class="pub-group-title">In Progress</div>
+      <div class="pub-list">
         <div class="pub-card">
           <div class="pub-main">
             <span class="year"><span class="status-dot status-rev"></span> Submitted &middot; Under Review</span>
             <h4>Adsorption-Induced Transformation of a 2D Cu-MOF into a Mn-Integrated Catalytic Nanonetwork for Circular Pollutant Valorisation</h4>
+            <div class="authors">Prathmesh Bhadane, Ramesh Gayathri, <strong class="me">Mayank Dotiyal</strong>, Abhijit Chhotray, Iuliia Mikulska, Superb Misra, Deepti Kalsi, Swaroop Chakraborty</div>
             <div class="venue">Submitted for peer review</div>
           </div>
           <span class="doi-btn static">Under Review</span>
@@ -584,15 +589,7 @@
           <div class="pub-main">
             <span class="year"><span class="status-dot status-rev"></span> Submitted &middot; Under Review</span>
             <h4>Sustainable substrate-fed regenerative growth of metal-organic framework thin film</h4>
-            <div class="venue">Submitted for peer review</div>
-          </div>
-          <span class="doi-btn static">Under Review</span>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-prep"></span> Submitted &middot; Under Review</span>
-            <h4>Thermodynamics of strain-engineered VO&#8322; overgrowth</h4>
+            <div class="authors">Prateek Goyal, Biraj K Satpathy, Sree Harsha Bharadwaj, Rakesh Behera, <strong class="me">Mayank Dotiyal</strong>, Abira Rashid, Raghavan Ranganathan, Swaroop Chakraborty, Superb Misra</div>
             <div class="venue">Submitted for peer review</div>
           </div>
           <span class="doi-btn static">Under Review</span>
@@ -601,7 +598,18 @@
         <div class="pub-card">
           <div class="pub-main">
             <span class="year"><span class="status-dot status-prep"></span> In Preparation</span>
+            <h4>Thermodynamics of strain-engineered VO&#8322; overgrowth</h4>
+            <div class="authors">Krishna Manwani, <strong class="me">Mayank Dotiyal</strong>, Emila Panda</div>
+            <div class="venue">Manuscript in preparation</div>
+          </div>
+          <span class="doi-btn static">In Prep</span>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-main">
+            <span class="year"><span class="status-dot status-prep"></span> In Preparation</span>
             <h4>Adverse thermal oxidation behavior in Pr-alloyed SmCo&#8325; powder: Microstructure and kinetic characteristics</h4>
+            <div class="authors">Ravi Teja Mittireddi, Priyanka Hemani, <strong class="me">Mayank Dotiyal</strong>, Ranjan Kumar Singh, Emila Panda</div>
             <div class="venue">Manuscript in preparation</div>
           </div>
           <span class="doi-btn static">In Prep</span>
@@ -614,6 +622,7 @@
           <div class="pub-main">
             <span class="year"><span class="status-dot status-pub"></span> 2022 &middot; Materials Today: Proceedings</span>
             <h4>Influence of anionic surfactant (SDS) on the structural properties of chromium oxide (Cr&#8322;O&#8323;) nanoparticles</h4>
+            <div class="authors">Jarnail Singh, <strong class="me">Mayank Dotiyal</strong>, Pankaj Bhardwaj, Kaushal Kumar, Prabhakar Bhandari, Vikram Verma</div>
             <div class="venue">Vol. 69 (2), 193&ndash;198</div>
           </div>
           <a href="https://doi.org/10.1016/j.matpr.2022.08.340" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
@@ -623,6 +632,7 @@
           <div class="pub-main">
             <span class="year"><span class="status-dot status-pub"></span> 2021 &middot; Springer Lecture Notes in Mechanical Engineering</span>
             <h4>A detailed investigation of structural and optical properties of CTAB assisted Cr&#8322;O&#8323; nanoparticles</h4>
+            <div class="authors">Jarnail Singh, <strong class="me">Mayank Dotiyal</strong>, Pankaj Bhardwaj, Prabhakar Bhandari, Kaushal Kumar, Saurav Dixit, Vikram Verma</div>
             <div class="venue">Advances in Functional and Smart Materials</div>
           </div>
           <a href="https://doi.org/10.1007/978-981-19-4147-4_30" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
@@ -635,6 +645,7 @@
           <div class="pub-main">
             <span class="year"><span class="status-dot status-pub"></span> 2025 Patent &middot; Indian Patent Office</span>
             <h4>Method of visibly-transparent heat-insulation coating and coated substrate obtained therefrom</h4>
+            <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Emila Panda</div>
             <div class="venue">Application No. 202521063654 &middot; Filed 03.07.2025</div>
           </div>
           <span class="doi-btn static" style="color: var(--accent);">Filed</span>
@@ -644,6 +655,7 @@
           <div class="pub-main">
             <span class="year"><span class="status-dot status-pub"></span> 2025 Patent &middot; Indian Patent Office</span>
             <h4>A method of fabricating metal-organic framework (MOF) membranes on substrates</h4>
+            <div class="authors">Superb K Misra, Prateek Goyal, Rakesh Behera, <strong class="me">Mayank Dotiyal</strong></div>
             <div class="venue">Application No. 202521067473 &middot; Filed 15.07.2025</div>
           </div>
           <span class="doi-btn static" style="color: var(--accent);">Filed</span>
@@ -653,6 +665,7 @@
           <div class="pub-main">
             <span class="year"><span class="status-dot status-pub"></span> 2023 Patent &middot; Indian Patent Office</span>
             <h4>A process for thermochromic coating</h4>
+            <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Emila Panda</div>
             <div class="venue">Application No. 202321024764 &middot; Filed 31.03.2023</div>
           </div>
           <span class="doi-btn static" style="color: var(--accent);">Filed</span>
