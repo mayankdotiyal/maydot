@@ -268,6 +268,14 @@
     padding-bottom: 8px; border-bottom: 1px dashed var(--border);
   }
   .pub-group-title:first-of-type { margin-top: 16px; }
+  .year-heading {
+    font-family: var(--font-heading); font-size: 20px; font-weight: 700;
+    color: var(--accent); margin: 40px 0 14px; display: flex; align-items: baseline; gap: 10px;
+  }
+  .year-heading:first-of-type { margin-top: 16px; }
+  .year-heading::after {
+    content: ""; flex: 1; height: 1px; background: var(--border);
+  }
 
   .pub-list { display: flex; flex-direction: column; gap: 12px; }
   .pub-card {
@@ -320,6 +328,26 @@
     .main-canvas { padding: 40px 24px; }
     .bento-grid { grid-template-columns: 1fr; }
     .bento-card.span-2 { grid-column: span 1; }
+  }
+
+  /* THEME TOGGLE — fixed top-right, persists via localStorage */
+  .theme-toggle {
+    position: fixed; top: 20px; right: 24px; z-index: 200;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--bg-card); border: 1px solid var(--border-highlight);
+    color: var(--text-main); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(8px);
+    transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .theme-toggle svg { width: 19px; height: 19px; position: absolute; transition: opacity 0.25s ease, transform 0.25s ease; }
+  .theme-toggle .icon-sun { opacity: 0; transform: rotate(-40deg) scale(0.7); }
+  .theme-toggle .icon-moon { opacity: 1; transform: rotate(0) scale(1); }
+  body[data-phase="metal"] .theme-toggle .icon-sun { opacity: 1; transform: rotate(0) scale(1); }
+  body[data-phase="metal"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(40deg) scale(0.7); }
+  @media (max-width: 600px) {
+    .theme-toggle { top: 14px; right: 14px; width: 38px; height: 38px; }
   }
 
   /* ==========================================================================

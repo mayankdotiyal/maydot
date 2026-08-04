@@ -9,6 +9,25 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-phase="semiconductor">
+<script>
+  (function () {
+    try {
+      if (localStorage.getItem('siteThemeMode') === 'light') {
+        document.body.setAttribute('data-phase', 'metal');
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<button id="themeToggle" class="theme-toggle" aria-label="Toggle dark or light mode" title="Toggle dark / light mode">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/>
+  </svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="4.5"/>
+    <path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12H5M19 12h2.5M4.2 19.8L6 18M18 6l1.8-1.8"/>
+  </svg>
+</button>
 
 <div class="app-layout">
 

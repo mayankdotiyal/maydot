@@ -9,6 +9,25 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-phase="semiconductor">
+<script>
+  (function () {
+    try {
+      if (localStorage.getItem('siteThemeMode') === 'light') {
+        document.body.setAttribute('data-phase', 'metal');
+      }
+    } catch (e) {}
+  })();
+</script>
+
+<button id="themeToggle" class="theme-toggle" aria-label="Toggle dark or light mode" title="Toggle dark / light mode">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/>
+  </svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="4.5"/>
+    <path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12H5M19 12h2.5M4.2 19.8L6 18M18 6l1.8-1.8"/>
+  </svg>
+</button>
 
 <div class="app-layout">
 
@@ -98,11 +117,11 @@
     </p>
 
     <section id="publications">
-      <div class="pub-group-title">Journal Articles</div>
+      <div class="year-heading">2026</div>
       <div class="pub-list">
         <div class="pub-card">
           <div class="pub-main">
-            <span class="year">2026 &middot; Journal of Alloys and Compounds</span>
+            <span class="year">Journal of Alloys and Compounds</span>
             <h4>Dopant induced variation in electronic structure, crystal structure, and electrical properties in VO&#8322;: Correlation between theory and experiment</h4>
             <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Rohit Dahule, Kenta Hongo, Tom Ichibha, Ryo Maezono, Emila Panda</div>
             <div class="venue">Vol. 1074, 189095</div>
@@ -112,47 +131,30 @@
 
         <div class="pub-card">
           <div class="pub-main">
-            <span class="year">2026 &middot; Applied Surface Science</span>
+            <span class="year">Applied Surface Science</span>
             <h4>Designing optically transparent heat insulation coating through chemical strain modulation</h4>
             <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Emila Panda</div>
             <div class="venue">Vol. 716, 164660</div>
           </div>
           <a href="https://doi.org/10.1016/j.apsusc.2025.164660" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
         </div>
+      </div>
 
+      <div class="year-heading">2025</div>
+      <div class="pub-list">
         <div class="pub-card">
           <div class="pub-main">
-            <span class="year">2024 &middot; Ceramics International</span>
-            <h4>Fabricating highly stable and reliable vanadium dioxide thin films: Insights from radio frequency magnetron sputtering</h4>
-            <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Manoj Singh, Rupak Banerjee, Emila Panda</div>
-            <div class="venue">Vol. 50 (22), Part C, 48234&ndash;48245</div>
+            <span class="year">Ceramics International</span>
+            <h4>Tunable titanium and tantalum oxide coatings as highly efficient antibacterial agents</h4>
+            <div class="authors">Kartikey Chaturvedi, Ravi Teja Mittireddi, <strong class="me">Mayank Dotiyal</strong>, Deepak G. Prajapati, Radhe Shyam, Mukesh Ranjan, Emila Panda</div>
+            <div class="venue">Vol. 51(27), Part A, 52245</div>
           </div>
-          <a href="https://doi.org/10.1016/j.ceramint.2024.09.173" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
+          <a href="https://doi.org/10.1016/j.ceramint.2025.08.432" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
         </div>
 
         <div class="pub-card">
           <div class="pub-main">
-            <span class="year">2025 &middot; Journal of Alloys and Compounds</span>
-            <h4>Microchemical induced magnetic changes in thermally oxidized Sm&#8322;(Co, Fe, Cu, Zr)&#8321;&#8327; alloys</h4>
-            <div class="authors">Ravi Teja Mittireddi, <strong class="me">Mayank Dotiyal</strong>, Priyanka Hemani, Ranjan Kumar Singh, Emila Panda</div>
-            <div class="venue">Vol. 1027, 180608</div>
-          </div>
-          <a href="https://doi.org/10.1016/j.jallcom.2025.180608" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year">2025 &middot; Powder Technology</span>
-            <h4>Highly active brookite titania nanoparticles for degradation of toxic organic pollutants</h4>
-            <div class="authors">Ravi Teja Mittireddi, <strong class="me">Mayank Dotiyal</strong>, Remiya Roy, Deepak Prajapati, Pramina Pandey, Abhijit Mishra, Emila Panda</div>
-            <div class="venue">Vol. 466, 121373</div>
-          </div>
-          <a href="https://doi.org/10.1016/j.powtec.2025.121373" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year">2025 &middot; ACS Omega</span>
+            <span class="year">ACS Omega</span>
             <h4>Antibacterial activity of cellulose acetate&ndash;graphene oxide composites: a comprehensive multimethod assessment</h4>
             <div class="authors">Prathmesh Bhadane, Deepak G. Prajapati, Adit Rambhia, <strong class="me">Mayank Dotiyal</strong>, Pramina Kumari Pandey, Deepak Rajput, Abhijit Mishra</div>
             <div class="venue">Vol. 10(30), 33814</div>
@@ -162,12 +164,61 @@
 
         <div class="pub-card">
           <div class="pub-main">
-            <span class="year">2025 &middot; Ceramics International</span>
-            <h4>Tunable titanium and tantalum oxide coatings as highly efficient antibacterial agents</h4>
-            <div class="authors">Kartikey Chaturvedi, Ravi Teja Mittireddi, <strong class="me">Mayank Dotiyal</strong>, Deepak G. Prajapati, Radhe Shyam, Mukesh Ranjan, Emila Panda</div>
-            <div class="venue">Vol. 51(27), Part A, 52245</div>
+            <span class="year">Powder Technology</span>
+            <h4>Highly active brookite titania nanoparticles for degradation of toxic organic pollutants</h4>
+            <div class="authors">Ravi Teja Mittireddi, <strong class="me">Mayank Dotiyal</strong>, Remiya Roy, Deepak Prajapati, Pramina Pandey, Abhijit Mishra, Emila Panda</div>
+            <div class="venue">Vol. 466, 121373</div>
           </div>
-          <a href="https://doi.org/10.1016/j.ceramint.2025.08.432" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
+          <a href="https://doi.org/10.1016/j.powtec.2025.121373" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-main">
+            <span class="year">Journal of Alloys and Compounds</span>
+            <h4>Microchemical induced magnetic changes in thermally oxidized Sm&#8322;(Co, Fe, Cu, Zr)&#8321;&#8327; alloys</h4>
+            <div class="authors">Ravi Teja Mittireddi, <strong class="me">Mayank Dotiyal</strong>, Priyanka Hemani, Ranjan Kumar Singh, Emila Panda</div>
+            <div class="venue">Vol. 1027, 180608</div>
+          </div>
+          <a href="https://doi.org/10.1016/j.jallcom.2025.180608" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
+        </div>
+      </div>
+
+      <div class="year-heading">2024</div>
+      <div class="pub-list">
+        <div class="pub-card">
+          <div class="pub-main">
+            <span class="year">Ceramics International</span>
+            <h4>Fabricating highly stable and reliable vanadium dioxide thin films: Insights from radio frequency magnetron sputtering</h4>
+            <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Manoj Singh, Rupak Banerjee, Emila Panda</div>
+            <div class="venue">Vol. 50 (22), Part C, 48234&ndash;48245</div>
+          </div>
+          <a href="https://doi.org/10.1016/j.ceramint.2024.09.173" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
+        </div>
+      </div>
+
+      <div class="year-heading">2022</div>
+      <div class="pub-list">
+        <div class="pub-card">
+          <div class="pub-main">
+            <span class="year">Materials Today: Proceedings</span>
+            <h4>Influence of anionic surfactant (SDS) on the structural properties of chromium oxide (Cr&#8322;O&#8323;) nanoparticles</h4>
+            <div class="authors">Jarnail Singh, <strong class="me">Mayank Dotiyal</strong>, Pankaj Bhardwaj, Kaushal Kumar, Prabhakar Bhandari, Vikram Verma</div>
+            <div class="venue">Vol. 69 (2), 193&ndash;198</div>
+          </div>
+          <a href="https://doi.org/10.1016/j.matpr.2022.08.340" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
+        </div>
+      </div>
+
+      <div class="year-heading">2021</div>
+      <div class="pub-list">
+        <div class="pub-card">
+          <div class="pub-main">
+            <span class="year">Springer Lecture Notes in Mechanical Engineering</span>
+            <h4>A detailed investigation of structural and optical properties of CTAB assisted Cr&#8322;O&#8323; nanoparticles</h4>
+            <div class="authors">Jarnail Singh, <strong class="me">Mayank Dotiyal</strong>, Pankaj Bhardwaj, Prabhakar Bhandari, Kaushal Kumar, Saurav Dixit, Vikram Verma</div>
+            <div class="venue">Advances in Functional and Smart Materials</div>
+          </div>
+          <a href="https://doi.org/10.1007/978-981-19-4147-4_30" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
         </div>
       </div>
 
@@ -214,44 +265,11 @@
         </div>
       </div>
 
-      <div class="pub-group-title">Conference Proceedings &amp; Book Chapters</div>
-      <div class="pub-list">
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-pub"></span> 2022 &middot; Materials Today: Proceedings</span>
-            <h4>Influence of anionic surfactant (SDS) on the structural properties of chromium oxide (Cr&#8322;O&#8323;) nanoparticles</h4>
-            <div class="authors">Jarnail Singh, <strong class="me">Mayank Dotiyal</strong>, Pankaj Bhardwaj, Kaushal Kumar, Prabhakar Bhandari, Vikram Verma</div>
-            <div class="venue">Vol. 69 (2), 193&ndash;198</div>
-          </div>
-          <a href="https://doi.org/10.1016/j.matpr.2022.08.340" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-pub"></span> 2021 &middot; Springer Lecture Notes in Mechanical Engineering</span>
-            <h4>A detailed investigation of structural and optical properties of CTAB assisted Cr&#8322;O&#8323; nanoparticles</h4>
-            <div class="authors">Jarnail Singh, <strong class="me">Mayank Dotiyal</strong>, Pankaj Bhardwaj, Prabhakar Bhandari, Kaushal Kumar, Saurav Dixit, Vikram Verma</div>
-            <div class="venue">Advances in Functional and Smart Materials</div>
-          </div>
-          <a href="https://doi.org/10.1007/978-981-19-4147-4_30" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-      </div>
-
       <div class="pub-group-title">Patents &amp; Intellectual Property</div>
       <div class="pub-list">
         <div class="pub-card">
           <div class="pub-main">
-            <span class="year"><span class="status-dot status-pub"></span> 2025 Patent &middot; Indian Patent Office</span>
-            <h4>Method of visibly-transparent heat-insulation coating and coated substrate obtained therefrom</h4>
-            <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Emila Panda</div>
-            <div class="venue">Application No. 202521063654 &middot; Filed 03.07.2025</div>
-          </div>
-          <span class="doi-btn static" style="color: var(--accent);">Filed</span>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-pub"></span> 2025 Patent &middot; Indian Patent Office</span>
+            <span class="year"><span class="status-dot status-pub"></span> Indian Patent Office</span>
             <h4>A method of fabricating metal-organic framework (MOF) membranes on substrates</h4>
             <div class="authors">Superb K Misra, Prateek Goyal, Rakesh Behera, <strong class="me">Mayank Dotiyal</strong></div>
             <div class="venue">Application No. 202521067473 &middot; Filed 15.07.2025</div>
@@ -261,7 +279,17 @@
 
         <div class="pub-card">
           <div class="pub-main">
-            <span class="year"><span class="status-dot status-pub"></span> 2023 Patent &middot; Indian Patent Office</span>
+            <span class="year"><span class="status-dot status-pub"></span> Indian Patent Office</span>
+            <h4>Method of visibly-transparent heat-insulation coating and coated substrate obtained therefrom</h4>
+            <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Emila Panda</div>
+            <div class="venue">Application No. 202521063654 &middot; Filed 03.07.2025</div>
+          </div>
+          <span class="doi-btn static" style="color: var(--accent);">Filed</span>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-main">
+            <span class="year"><span class="status-dot status-pub"></span> Indian Patent Office</span>
             <h4>A process for thermochromic coating</h4>
             <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Emila Panda</div>
             <div class="venue">Application No. 202321024764 &middot; Filed 31.03.2023</div>
