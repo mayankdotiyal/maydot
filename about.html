@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Mayank Dotiyal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-phase="semiconductor">
+
+<div class="app-layout">
+
+  <!-- LEFT SIDEBAR: IDENTITY & TELEMETRY CONTROLS -->
+  <aside class="sidebar">
+    <div>
+      <div class="identity">
+        <div class="status-pill"><span class="indicator"></span> Active Researcher</div>
+        <h1>Mayank Dotiyal</h1>
+        <p>Postdoctoral Researcher at the <strong>Research Institute for Electronic Science (RIES), Hokkaido University</strong>. Specializing in vanadium dioxide (VO&#8322;) thin films, chemical strain engineering, and ab initio optoelectronic modeling.</p>
+        <div class="inst">Sapporo, Hokkaido, Japan</div>
+      </div>
+
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About <span>01</span></a></li>
+        <li><a href="research.html">Research <span>02</span></a></li>
+        <li><a href="gallery.html">Gallery <span>03</span></a></li>
+        <li><a href="publications.html">Publications <span>04</span></a></li>
+        <li><a href="contact.html">Contact <span>05</span></a></li>
+      </ul>
+
+      <!-- THE INTERACTIVE THERMAL STAGE -->
+      <div class="telemetry-stage">
+        <div class="telemetry-header">
+          <span>Thermal Stage Controller</span>
+          <span id="phaseLabel">Monoclinic (M&#8321;)</span>
+        </div>
+        <div class="stage-readout" id="tempReadout">
+          25&deg;C <span>/ Semiconducting State</span>
+        </div>
+        <div class="slider-wrap">
+          <input type="range" min="20" max="90" value="25" class="temp-slider" id="tempSlider" aria-label="Temperature Stage Controller">
+        </div>
+        <div class="telemetry-metrics">
+          <div class="metric">
+            <span class="metric-label">Bandgap (E<sub>g</sub>)</span>
+            <span class="metric-value" id="metricBandgap">~0.60 eV</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">IR Transmission</span>
+            <span class="metric-value" id="metricIR">High (85%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a href="mailto:mayankd@iitgn.ac.in" title="Email" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3.5 6.5L12 13L20.5 6.5"/>
+          </svg>
+        </a>
+        <a href="https://scholar.google.com/citations?user=yLHQRygAAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar" aria-label="Google Scholar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4L2 9.5L12 15L22 9.5L12 4Z"/>
+            <path d="M6 12v5.5C6 19 8.7 20.5 12 20.5s6-1.5 6-3V12"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/mayank-dotiyal/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <span class="mono-mark">in</span>
+        </a>
+        <a href="https://www.researchgate.net/profile/Mayank-Dotiyal-2" target="_blank" rel="noopener" title="ResearchGate" aria-label="ResearchGate">
+          <span class="mono-mark">RG</span>
+        </a>
+        <a href="https://dotiyalmayank.carrd.co/" target="_blank" rel="noopener" title="Research Card" aria-label="Research Card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2.5" y="5.5" width="19" height="13" rx="2"/>
+            <path d="M2.5 9.5h19"/>
+            <path d="M6 14h5"/>
+          </svg>
+        </a>
+      </div>
+      <div>&copy; 2026 Mayank Dotiyal &middot; RIES, Hokkaido University</div>
+    </div>
+  </aside>
+
+  <!-- MAIN SCROLLING CANVAS -->
+  <main class="main-canvas">
+
+    <span class="eyebrow">Academic Lineage</span>
+    <h1 class="page-title">About</h1>
+    <p class="hero-sub">
+      I am a Postdoctoral Researcher at the Research Institute for Electronic Science (RIES), Hokkaido University,
+      working with Prof. Hiromichi Ohta. I completed my Ph.D. in Materials Engineering at IIT Gandhinagar under
+      Prof. Emila Panda, where my doctoral work focused on chemical strain-induced structural and semiconductor-to-metal
+      transitions in VO&#8322; thin films &mdash; combining RF magnetron sputtering with first-principles DFT (VASP) to
+      understand and engineer dopant-driven phase transitions. Before that, my M.Tech thesis at NIT Hamirpur examined
+      how surfactant chemistry controls nanoparticle size, strain, and optical defect states in Cr&#8322;O&#8323;.
+    </p>
+
+    <section id="credentials">
+      <div class="section-head">
+        <span class="idx">01</span>
+        <h2>Academic Credentials &amp; Lineage</h2>
+      </div>
+      <div class="timeline-grid">
+        <div class="timeline-card">
+          <span class="timeline-year">2020 &ndash; 2025</span>
+          <h3>Ph.D., Materials Engineering</h3>
+          <div class="timeline-inst">IIT Gandhinagar, Gujarat &middot; Advised by <a href="https://sites.google.com/iitgn.ac.in/otfl/team?authuser=0" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline;">Prof. Emila Panda</a></div>
+          <span class="timeline-score">CPI: 9.55 / 10</span>
+        </div>
+
+        <div class="timeline-card">
+          <span class="timeline-year">2018 &ndash; 2020</span>
+          <h3>M.Tech., Materials Science &amp; Engineering</h3>
+          <div class="timeline-inst">NIT Hamirpur, Himachal Pradesh &middot; Advised by <a href="https://portfolios.nith.ac.in/index.php?/nith/dr-vikram-verma354" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline;">Prof. Vikram Verma</a></div>
+          <span class="timeline-score">CPI: 8.68 / 10</span>
+        </div>
+
+        <div class="timeline-card">
+          <span class="timeline-year">2013 &ndash; 2017</span>
+          <h3>B.Tech., Mechanical Engineering</h3>
+          <div class="timeline-inst">Lovely Professional University, Punjab</div>
+          <span class="timeline-score">CPI: 9.21 / 10</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
