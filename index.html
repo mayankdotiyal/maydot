@@ -3,328 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mayank Dotiyal — Ph.D. Materials Engineering</title>
+<title>Mayank Dotiyal — Materials & Phase Transition Engineering</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    /* PHASE 1: MONOCLINIC (Deep Vacuum / Infrared Transparent) */
-    --bg: #0c0d12;
-    --bg-panel: #13151d;
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --bg-card-hover: rgba(255, 255, 255, 0.06);
-    --text-main: #f0f2f8;
-    --text-muted: #8c93a8;
-    --text-dim: #565d70;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-highlight: rgba(255, 255, 255, 0.18);
-    --accent: #ff7b00;
-    --accent-glow: rgba(255, 123, 0, 0.15);
-    --accent-gradient: linear-gradient(135deg, #ff7b00, #ffba00);
-    --tag-bg: rgba(255, 123, 0, 0.1);
-    --tag-border: rgba(255, 123, 0, 0.3);
-    --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-    
-    /* Typography */
-    --font-heading: 'Space Grotesk', -apple-system, sans-serif;
-    --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
-    
-    --transition-fast: 0.2s ease;
-    --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  /* PHASE 2: RUTILE (Anodized Silver / Infrared Reflective) */
-  body[data-phase="metal"] {
-    --bg: #e6ebf2;
-    --bg-panel: #f3f6fa;
-    --bg-card: rgba(255, 255, 255, 0.7);
-    --bg-card-hover: rgba(255, 255, 255, 0.95);
-    --text-main: #0f141d;
-    --text-muted: #525f75;
-    --text-dim: #8896ac;
-    --border: rgba(15, 20, 29, 0.1);
-    --border-highlight: rgba(15, 20, 29, 0.25);
-    --accent: #0055ff;
-    --accent-glow: rgba(0, 85, 255, 0.12);
-    --accent-gradient: linear-gradient(135deg, #0055ff, #00d5ff);
-    --tag-bg: rgba(0, 85, 255, 0.08);
-    --tag-border: rgba(0, 85, 255, 0.25);
-    --shadow: 0 20px 40px -15px rgba(15, 20, 29, 0.12);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  
-  body {
-    background-color: var(--bg);
-    color: var(--text-main);
-    font-family: var(--font-body);
-    line-height: 1.6;
-    transition: background-color var(--transition-smooth), color var(--transition-smooth);
-    overflow-x: hidden;
-  }
-
-  /* Ambient Cleanroom Grid */
-  body::before {
-    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background-size: 40px 40px;
-    background-image: 
-      linear-gradient(to right, var(--border) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-    opacity: 0.5;
-    transition: opacity var(--transition-smooth);
-  }
-
-  ::selection { background: var(--accent); color: #fff; }
-  a { color: inherit; text-decoration: none; transition: var(--transition-fast); }
-
-  /* ==========================================================================
-     LAYOUT ARCHITECTURE: SIDEBAR + MAIN CANVAS
-     ========================================================================== */
-  .app-layout {
-    display: flex; min-height: 100vh;
-  }
-
-  /* LEFT SIDEBAR: TELEMETRY & IDENTITY */
-  .sidebar {
-    width: 360px; height: 100vh; position: sticky; top: 0;
-    background: var(--bg-panel); border-right: 1px solid var(--border);
-    padding: 40px 32px; display: flex; flex-direction: column; justify-content: space-between;
-    z-index: 100; transition: background-color var(--transition-smooth), border-color var(--transition-smooth);
-    overflow-y: auto;
-  }
-
-  .identity .status-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 12px; border-radius: 20px; font-family: var(--font-mono); font-size: 11px; font-weight: 600;
-    background: var(--tag-bg); border: 1px solid var(--tag-border); color: var(--accent);
-    margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px;
-  }
-  .status-pill .indicator {
-    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
-    box-shadow: 0 0 8px var(--accent);
-  }
-
-  .identity h1 {
-    font-family: var(--font-heading); font-size: 32px; font-weight: 700;
-    line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 12px;
-  }
-  .identity p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
-  .identity .inst { margin-top: 12px; font-weight: 600; color: var(--text-main); font-size: 13.5px; }
-
-  /* Navigation Links inside Sidebar */
-  .nav-menu { list-style: none; margin: 24px 0; display: flex; flex-direction: column; gap: 6px; }
-  .nav-menu a {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 14px; border-radius: 8px; font-weight: 500; font-size: 14px;
-    color: var(--text-muted); border: 1px solid transparent;
-  }
-  .nav-menu a:hover {
-    color: var(--text-main); background: var(--bg-card); border-color: var(--border);
-    transform: translateX(4px);
-  }
-  .nav-menu a span { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
-
-  /* TELEMETRY STAGE CONTROLLER (Interactive Slider) */
-  .telemetry-stage {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 20px; position: relative; overflow: hidden; margin-bottom: 24px;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-  }
-  .telemetry-header {
-    display: flex; justify-content: space-between; align-items: center;
-    font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);
-    text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;
-  }
-  .stage-readout {
-    font-family: var(--font-mono); font-size: 22px; font-weight: 600;
-    color: var(--accent); margin-bottom: 16px; display: flex; align-items: baseline; gap: 8px;
-  }
-  .stage-readout span { font-size: 12px; font-weight: 400; color: var(--text-muted); }
-
-  /* Custom Slider Styling */
-  .slider-wrap { position: relative; margin-bottom: 16px; }
-  .temp-slider {
-    -webkit-appearance: none; width: 100%; height: 6px; border-radius: 3px;
-    background: var(--border-highlight); outline: none; cursor: pointer;
-  }
-  .temp-slider::-webkit-slider-thumb {
-    -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
-    background: var(--text-main); border: 3px solid var(--accent);
-    cursor: grab; transition: transform 0.1s ease;
-    box-shadow: 0 0 10px var(--accent-glow);
-  }
-  .temp-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.2); }
-  
-  .telemetry-metrics {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-    padding-top: 12px; border-top: 1px dashed var(--border);
-  }
-  .metric { font-family: var(--font-mono); font-size: 11px; }
-  .metric-label { color: var(--text-dim); display: block; }
-  .metric-value { font-weight: 600; color: var(--text-main); }
-
-  .sidebar-footer { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
-  .social-links { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
-  .social-links a { color: var(--text-muted); text-decoration: underline; text-underline-offset: 4px; }
-  .social-links a:hover { color: var(--accent); }
-
-  /* ==========================================================================
-     MAIN SCROLLING CANVAS
-     ========================================================================== */
-  .main-canvas {
-    flex: 1; padding: 64px 80px; max-width: 1200px;
-  }
-
-  /* Editorial Hero Statement */
-  .hero-statement {
-    font-family: var(--font-heading); font-size: clamp(30px, 3.8vw, 44px);
-    font-weight: 600; line-height: 1.15; letter-spacing: -1px;
-    margin-bottom: 40px; max-width: 850px;
-  }
-  .hero-statement span {
-    background: var(--accent-gradient); -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; display: inline;
-  }
-  .hero-sub {
-    font-size: 16.5px; color: var(--text-muted); max-width: 760px; line-height: 1.6;
-  }
-  .hero-sub a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-
-  .section-head {
-    display: flex; align-items: baseline; gap: 16px;
-    margin: 80px 0 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
-  }
-  .section-head h2 { font-family: var(--font-heading); font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
-  .section-head .idx { font-family: var(--font-mono); font-size: 13px; color: var(--accent); }
-
-  /* ACADEMIC TIMELINE & CREDENTIALS */
-  .timeline-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-  .timeline-card {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 24px; transition: var(--transition-fast);
-  }
-  .timeline-card:hover { border-color: var(--border-highlight); transform: translateY(-3px); }
-  .timeline-year { font-family: var(--font-mono); font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 8px; display: block; }
-  .timeline-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 4px; color: var(--text-main); }
-  .timeline-inst { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
-  .timeline-score {
-    display: inline-block; font-family: var(--font-mono); font-size: 11.5px;
-    padding: 3px 10px; border-radius: 12px; background: var(--tag-bg);
-    border: 1px solid var(--tag-border); color: var(--text-main);
-  }
-
-  /* BENTO GRID (Research Focus) */
-  .bento-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-  }
-  .bento-card {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 32px; transition: var(--transition-smooth);
-    display: flex; flex-direction: column; justify-content: space-between;
-    position: relative; overflow: hidden; backdrop-filter: blur(10px);
-  }
-  .bento-card:hover {
-    background: var(--bg-card-hover); border-color: var(--border-highlight);
-    transform: translateY(-4px); box-shadow: var(--shadow);
-  }
-  .bento-card.span-2 { grid-column: span 2; }
-  @media (max-width: 1100px) { .bento-card.span-2, .bento-card { grid-column: span 3; } }
-
-  .bento-tag {
-    font-family: var(--font-mono); font-size: 11px; color: var(--accent);
-    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; display: block;
-  }
-  .bento-card h3 { font-family: var(--font-heading); font-size: 22px; margin-bottom: 12px; font-weight: 600; }
-  .bento-card p { font-size: 14.5px; color: var(--text-muted); line-height: 1.6; }
-  .bento-footer { margin-top: 24px; padding-top: 16px; border-top: 1px dashed var(--border); font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
-
-  /* GRAPHICAL ABSTRACTS (Sleek Visual Showcase) */
-  .gallery-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
-  }
-  .gallery-item {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
-    overflow: hidden; transition: var(--transition-smooth);
-  }
-  .gallery-item:hover { border-color: var(--border-highlight); transform: translateY(-4px); }
-  .gallery-img {
-    aspect-ratio: 16/10; background: var(--bg-panel); display: flex;
-    align-items: center; justify-content: center; position: relative; overflow: hidden;
-    border-bottom: 1px solid var(--border);
-  }
-  .gallery-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-  .gallery-item:hover .gallery-img img { transform: scale(1.05); }
-  .gallery-img .placeholder { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
-  .gallery-caption { padding: 20px; font-size: 14px; font-weight: 500; color: var(--text-main); }
-
-  /* PUBLICATIONS LIST */
-  .pub-group-title {
-    font-family: var(--font-mono); font-size: 12px; text-transform: uppercase;
-    letter-spacing: 1.5px; color: var(--text-dim); margin: 36px 0 16px;
-    padding-bottom: 8px; border-bottom: 1px dashed var(--border);
-  }
-  .pub-group-title:first-of-type { margin-top: 16px; }
-
-  .pub-list { display: flex; flex-direction: column; gap: 12px; }
-  .pub-card {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 22px 24px; transition: var(--transition-fast); display: flex;
-    justify-content: space-between; align-items: flex-start; gap: 24px;
-  }
-  .pub-card:hover {
-    background: var(--bg-card-hover); border-color: var(--border-highlight);
-    transform: translateX(6px);
-  }
-  .pub-main .year { 
-    font-family: var(--font-mono); font-size: 12px; color: var(--accent); 
-    font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
-  }
-  .pub-main h4 { font-size: 15.5px; font-weight: 600; margin-bottom: 6px; line-height: 1.45; color: var(--text-main); }
-  .pub-main .authors { font-size: 13px; color: var(--text-dim); margin: 2px 0 6px; }
-  .pub-main .authors .me { color: var(--text-main); font-weight: 600; }
-  .pub-main .venue { font-size: 13.5px; color: var(--text-muted); }
-  
-  .status-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
-  .status-pub { background: #2e7d32; }
-  .status-rev { background: #ed6c02; }
-  .status-prep { background: var(--text-dim); }
-
-  .doi-btn {
-    flex: 0 0 auto; font-family: var(--font-mono); font-size: 11px;
-    padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-highlight);
-    color: var(--text-main); background: transparent; white-space: nowrap;
-  }
-  .doi-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .doi-btn.static { border-color: transparent; color: var(--text-dim); cursor: default; }
-  .doi-btn.static:hover { background: transparent; color: var(--text-dim); }
-
-  /* TECHNICAL ARSENAL (Categorized Badges) */
-  .arsenal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-  .arsenal-category h4 { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 12px; }
-  .badge-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
-  .tech-badge {
-    padding: 8px 14px; background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--text-muted);
-    transition: var(--transition-fast);
-  }
-  .tech-badge:hover { color: var(--text-main); border-color: var(--accent); background: var(--tag-bg); }
-
-  /* RESPONSIVE DESIGN */
-  @media (max-width: 1024px) {
-    .app-layout { flex-direction: column; }
-    .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border); padding: 32px 24px; }
-    .main-canvas { padding: 40px 24px; }
-    .bento-grid { grid-template-columns: 1fr; }
-    .bento-card.span-2 { grid-column: span 1; }
-  }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body data-phase="semiconductor">
 
 <div class="app-layout">
-  
+
   <!-- LEFT SIDEBAR: IDENTITY & TELEMETRY CONTROLS -->
   <aside class="sidebar">
     <div>
@@ -336,11 +23,12 @@
       </div>
 
       <ul class="nav-menu">
-        <li><a href="#about">About &amp; Lineage <span>01</span></a></li>
-        <li><a href="#research">Research Matrix <span>02</span></a></li>
-        <li><a href="#abstracts">Visual Abstracts <span>03</span></a></li>
-        <li><a href="#publications">Scholarly Output <span>04</span></a></li>
-        <li><a href="#arsenal">Technical Arsenal <span>05</span></a></li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About <span>01</span></a></li>
+        <li><a href="research.html">Research <span>02</span></a></li>
+        <li><a href="gallery.html">Gallery <span>03</span></a></li>
+        <li><a href="publications.html">Publications <span>04</span></a></li>
+        <li><a href="contact.html">Contact <span>05</span></a></li>
       </ul>
 
       <!-- THE INTERACTIVE THERMAL STAGE -->
@@ -370,407 +58,74 @@
 
     <div class="sidebar-footer">
       <div class="social-links">
-        <a href="mailto:mayankd@iitgn.ac.in">Email</a>
-        <a href="https://scholar.google.com/citations?user=yLHQRygAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
-        <a href="https://www.linkedin.com/in/mayank-dotiyal/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://www.researchgate.net/profile/Mayank-Dotiyal-2" target="_blank" rel="noopener">ResearchGate</a>
-        <a href="https://dotiyalmayank.carrd.co/" target="_blank" rel="noopener">Research Card</a>
+        <a href="mailto:mayankd@iitgn.ac.in" title="Email" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3.5 6.5L12 13L20.5 6.5"/>
+          </svg>
+        </a>
+        <a href="https://scholar.google.com/citations?user=yLHQRygAAAAJ&hl=en" target="_blank" rel="noopener" title="Google Scholar" aria-label="Google Scholar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4L2 9.5L12 15L22 9.5L12 4Z"/>
+            <path d="M6 12v5.5C6 19 8.7 20.5 12 20.5s6-1.5 6-3V12"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/mayank-dotiyal/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <span class="mono-mark">in</span>
+        </a>
+        <a href="https://www.researchgate.net/profile/Mayank-Dotiyal-2" target="_blank" rel="noopener" title="ResearchGate" aria-label="ResearchGate">
+          <span class="mono-mark">RG</span>
+        </a>
+        <a href="https://dotiyalmayank.carrd.co/" target="_blank" rel="noopener" title="Research Card" aria-label="Research Card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2.5" y="5.5" width="19" height="13" rx="2"/>
+            <path d="M2.5 9.5h19"/>
+            <path d="M6 14h5"/>
+          </svg>
+        </a>
       </div>
       <div>&copy; 2026 Mayank Dotiyal &middot; RIES, Hokkaido University</div>
     </div>
   </aside>
 
-  <!-- MAIN SCROLLING EDITORIAL CANVAS -->
+  <!-- MAIN SCROLLING CANVAS -->
   <main class="main-canvas">
-    
+
     <div class="hero-statement">
-      Engineering the atomic lattice of <span>vanadium dioxide (VO&#8322;) thin films</span> — modulating chemical strain and dopant chemistry to tune the semiconductor&ndash;to&ndash;metal transition for energy-efficient smart windows.
+      Engineering the atomic lattice of <span>vanadium dioxide (VO&#8322;) thin films</span> &mdash; modulating chemical strain and dopant chemistry to tune the semiconductor&ndash;to&ndash;metal transition for energy-efficient smart windows.
     </div>
     <p class="hero-sub">
-      Working in the laboratory of <a href="https://functfilm.es.hokudai.ac.jp/english/member/%E5%A4%AA%E7%94%B0-%E8%A3%95%E9%81%93/" target="_blank" rel="noopener">Prof. Hiromichi Ohta</a> at RIES. My research bridges RF magnetron sputtering with first-principles Density Functional Theory (DFT) utilizing VASP and Quantum ESPRESSO to correlate synthesis conditions with structure, defects, and functional properties in inorganic oxide systems.
+      Working in the laboratory of <a href="https://functfilm.es.hokudai.ac.jp/english/member/%E5%A4%AA%E7%94%B0-%E8%A3%95%E9%81%93/" target="_blank" rel="noopener">Prof. Hiromichi Ohta</a> at RIES, Hokkaido University. My research bridges RF magnetron sputtering with first-principles Density Functional Theory (DFT) utilizing VASP and Quantum ESPRESSO to correlate synthesis conditions with structure, defects, and functional properties in inorganic oxide systems.
     </p>
 
-    <!-- SECTION 01: ACADEMIC LINEAGE -->
-    <section id="about">
-      <div class="section-head">
-        <span class="idx">01</span>
-        <h2>Academic Credentials</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-value">9</div>
+        <div class="kpi-label">Journal Articles</div>
       </div>
-      <div class="timeline-grid">
-        <div class="timeline-card">
-          <span class="timeline-year">2020 &ndash; 2025</span>
-          <h3>Ph.D., Materials Engineering</h3>
-          <div class="timeline-inst">IIT Gandhinagar, Gujarat &middot; Advised by <a href="https://sites.google.com/iitgn.ac.in/otfl/team?authuser=0" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline;">Prof. Emila Panda</a></div>
-          <span class="timeline-score">CPI: 9.55 / 10</span>
-        </div>
-        
-        <div class="timeline-card">
-          <span class="timeline-year">2018 &ndash; 2020</span>
-          <h3>M.Tech., Materials Science &amp; Engineering</h3>
-          <div class="timeline-inst">NIT Hamirpur, Himachal Pradesh &middot; Advised by <a href="https://portfolios.nith.ac.in/index.php?/nith/dr-vikram-verma354" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline;">Prof. Vikram Verma</a></div>
-          <span class="timeline-score">CPI: 8.68 / 10</span>
-        </div>
-
-        <div class="timeline-card">
-          <span class="timeline-year">2013 &ndash; 2017</span>
-          <h3>B.Tech., Mechanical Engineering</h3>
-          <div class="timeline-inst">Lovely Professional University, Punjab</div>
-          <span class="timeline-score">CPI: 9.21 / 10</span>
-        </div>
+      <div class="kpi-card">
+        <div class="kpi-value">3</div>
+        <div class="kpi-label">Indian Patents Filed</div>
       </div>
-    </section>
-
-    <!-- SECTION 02: BENTO GRID RESEARCH -->
-    <section id="research">
-      <div class="section-head">
-        <span class="idx">02</span>
-        <h2>Research Matrix</h2>
+      <div class="kpi-card">
+        <div class="kpi-value">2</div>
+        <div class="kpi-label">Countries &middot; India / Japan</div>
       </div>
-      <div class="bento-grid">
-        <div class="bento-card span-2">
-          <div>
-            <span class="bento-tag">Doctoral Dissertation &middot; IIT Gandhinagar</span>
-            <h3>Chemical Strain-Induced Structural and Semiconductor-to-Metal Transition in VO&#8322; Thin Film</h3>
-            <p>Substituted V<sup>4+</sup> lattice sites with larger-radius, higher-valency cationic dopants to depress the transition temperature toward near-room-temperature levels. Synthesized via RF magnetron sputtering and elucidated through first-principles DFT across unstrained and strained M&#8321;/R polymorphs.</p>
-          </div>
-          <div class="bento-footer">Outcomes: 3 Peer-Reviewed Papers &middot; 2 Indian Patents</div>
-        </div>
-
-        <div class="bento-card">
-          <div>
-            <span class="bento-tag">Applied Technology</span>
-            <h3>Thermochromic Smart Windows</h3>
-            <p>Translating strain- and dopant-tuned VO&#8322; films into visibly transparent, high-stability heat-insulation coatings for energy-efficient architecture.</p>
-          </div>
-          <div class="bento-footer">Grant: Tata Steel MaterialNEXT4.0</div>
-        </div>
-
-        <div class="bento-card">
-          <div>
-            <span class="bento-tag">Ab Initio Theory</span>
-            <h3>First-Principles Computation</h3>
-            <p>Modeling thermodynamic stability, formation energies, and electronic density of states (VASP, Quantum ESPRESSO) to elucidate substitution-induced phase transitions.</p>
-          </div>
-          <div class="bento-footer">Core Focus: Electronic Band Modulation</div>
-        </div>
-
-        <div class="bento-card span-2">
-          <div>
-            <span class="bento-tag">Master's Thesis &middot; NIT Hamirpur</span>
-            <h3>Surfactant-Controlled Defect &amp; Strain Chemistry in Cr&#8322;O&#8323; Nanoparticles</h3>
-            <p>Modulated anionic (SDS) and cationic (CTAB) surfactant concentrations during wet-chemical co-precipitation to study lattice strain, optical defect states, and establish the inverse relationship between Urbach energy and optical bandgap.</p>
-          </div>
-          <div class="bento-footer">Outcomes: 1 Book Chapter (Springer) &middot; 1 Conference Proceeding</div>
-        </div>
+      <div class="kpi-card">
+        <div class="kpi-value">2020&ndash;Present</div>
+        <div class="kpi-label">Active Research Years</div>
       </div>
-    </section>
+    </div>
 
-    <!-- SECTION 03: GRAPHICAL ABSTRACTS GALLERY -->
-    <section id="abstracts">
-      <div class="section-head">
-        <span class="idx">03</span>
-        <h2>Visual Abstracts</h2>
-      </div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <div class="gallery-img">
-            <img src="images/jalcom-26.png" alt="JALLCOM 2026" onerror="this.parentElement.innerHTML='<span class=\'placeholder\'>[Image: jalcom-26.png]</span>'">
-          </div>
-          <div class="gallery-caption">Dopant induced variation in electronic structure, crystal structure, and electrical properties in VO&#8322;</div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-img">
-            <img src="images/apsus-25.png" alt="Applied Surface Science 2026" onerror="this.parentElement.innerHTML='<span class=\'placeholder\'>[Image: apsus-25.png]</span>'">
-          </div>
-          <div class="gallery-caption">Designing optically transparent heat-insulation coatings through chemical strain modulation</div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-img">
-            <img src="images/ceri-24.png" alt="Ceramics International 2024" onerror="this.parentElement.innerHTML='<span class=\'placeholder\'>[Image: ceri-24.png]</span>'">
-          </div>
-          <div class="gallery-caption">Fabricating highly stable and reliable VO&#8322; thin films via RF magnetron sputtering</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 04: PUBLICATIONS & PATENTS -->
-    <section id="publications">
-      <div class="section-head">
-        <span class="idx">04</span>
-        <h2>Scholarly Output</h2>
-      </div>
-      
-      <div class="pub-group-title">Journal Articles</div>
-      <div class="pub-list">
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year">2026 &middot; Journal of Alloys and Compounds</span>
-            <h4>Dopant induced variation in electronic structure, crystal structure, and electrical properties in VO&#8322;: Correlation between theory and experiment</h4>
-            <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Rohit Dahule, Kenta Hongo, Tom Ichibha, Ryo Maezono, Emila Panda</div>
-            <div class="venue">Vol. 1074, 189095</div>
-          </div>
-          <a href="https://doi.org/10.1016/j.jallcom.2026.189095" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year">2026 &middot; Applied Surface Science</span>
-            <h4>Designing optically transparent heat insulation coating through chemical strain modulation</h4>
-            <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Emila Panda</div>
-            <div class="venue">Vol. 716, 164660</div>
-          </div>
-          <a href="https://doi.org/10.1016/j.apsusc.2025.164660" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year">2024 &middot; Ceramics International</span>
-            <h4>Fabricating highly stable and reliable vanadium dioxide thin films: Insights from radio frequency magnetron sputtering</h4>
-            <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Manoj Singh, Rupak Banerjee, Emila Panda</div>
-            <div class="venue">Vol. 50 (22), Part C, 48234&ndash;48245</div>
-          </div>
-          <a href="https://doi.org/10.1016/j.ceramint.2024.09.173" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-        
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year">2025 &middot; Journal of Alloys and Compounds</span>
-            <h4>Microchemical induced magnetic changes in thermally oxidized Sm&#8322;(Co, Fe, Cu, Zr)&#8321;&#8327; alloys</h4>
-            <div class="authors">Ravi Teja Mittireddi, <strong class="me">Mayank Dotiyal</strong>, Priyanka Hemani, Ranjan Kumar Singh, Emila Panda</div>
-            <div class="venue">Vol. 1027, 180608</div>
-          </div>
-          <a href="https://doi.org/10.1016/j.jallcom.2025.180608" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year">2025 &middot; Powder Technology</span>
-            <h4>Highly active brookite titania nanoparticles for degradation of toxic organic pollutants</h4>
-            <div class="authors">Ravi Teja Mittireddi, <strong class="me">Mayank Dotiyal</strong>, Remiya Roy, Deepak Prajapati, Pramina Pandey, Abhijit Mishra, Emila Panda</div>
-            <div class="venue">Vol. 466, 121373</div>
-          </div>
-          <a href="https://doi.org/10.1016/j.powtec.2025.121373" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-        
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year">2025 &middot; ACS Omega</span>
-            <h4>Antibacterial activity of cellulose acetate&ndash;graphene oxide composites: a comprehensive multimethod assessment</h4>
-            <div class="authors">Prathmesh Bhadane, Deepak G. Prajapati, Adit Rambhia, <strong class="me">Mayank Dotiyal</strong>, Pramina Kumari Pandey, Deepak Rajput, Abhijit Mishra</div>
-            <div class="venue">Vol. 10(30), 33814</div>
-          </div>
-          <a href="https://pubs.acs.org/doi/10.1021/acsomega.5c04982" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year">2025 &middot; Ceramics International</span>
-            <h4>Tunable titanium and tantalum oxide coatings as highly efficient antibacterial agents</h4>
-            <div class="authors">Kartikey Chaturvedi, Ravi Teja Mittireddi, <strong class="me">Mayank Dotiyal</strong>, Deepak G. Prajapati, Radhe Shyam, Mukesh Ranjan, Emila Panda</div>
-            <div class="venue">Vol. 51(27),Part A, 52245</div>
-          </div>
-          <a href="https://doi.org/10.1016/j.ceramint.2025.08.432" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-      </div>
-
-      <div class="pub-group-title">In Progress</div>
-      <div class="pub-list">
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-rev"></span> Submitted &middot; Under Review</span>
-            <h4>Adsorption-Induced Transformation of a 2D Cu-MOF into a Mn-Integrated Catalytic Nanonetwork for Circular Pollutant Valorisation</h4>
-            <div class="authors">Prathmesh Bhadane, Ramesh Gayathri, <strong class="me">Mayank Dotiyal</strong>, Abhijit Chhotray, Iuliia Mikulska, Superb Misra, Deepti Kalsi, Swaroop Chakraborty</div>
-            <div class="venue">Submitted for peer review</div>
-          </div>
-          <span class="doi-btn static">Under Review</span>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-rev"></span> Submitted &middot; Under Review</span>
-            <h4>Sustainable substrate-fed regenerative growth of metal-organic framework thin film</h4>
-            <div class="authors">Prateek Goyal, Biraj K Satpathy, Sree Harsha Bharadwaj, Rakesh Behera, <strong class="me">Mayank Dotiyal</strong>, Abira Rashid, Raghavan Ranganathan, Swaroop Chakraborty, Superb Misra</div>
-            <div class="venue">Submitted for peer review</div>
-          </div>
-          <span class="doi-btn static">Under Review</span>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-prep"></span> Under Review</span>
-            <h4>Thermodynamics of strain-engineered VO&#8322; overgrowth</h4>
-            <div class="authors">Krishna Manwani, <strong class="me">Mayank Dotiyal</strong>, Emila Panda</div>
-            <div class="venue">Submitted for peer review</div>
-          </div>
-          <span class="doi-btn static">In Prep</span>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-prep"></span> In Preparation</span>
-            <h4>Adverse thermal oxidation behavior in Pr-alloyed SmCo&#8325; powder: Microstructure and kinetic characteristics</h4>
-            <div class="authors">Ravi Teja Mittireddi, Priyanka Hemani, <strong class="me">Mayank Dotiyal</strong>, Ranjan Kumar Singh, Emila Panda</div>
-            <div class="venue">Manuscript in preparation</div>
-          </div>
-          <span class="doi-btn static">In Prep</span>
-        </div>
-      </div>
-
-      <div class="pub-group-title">Conference Proceedings &amp; Book Chapters</div>
-      <div class="pub-list">
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-pub"></span> 2022 &middot; Materials Today: Proceedings</span>
-            <h4>Influence of anionic surfactant (SDS) on the structural properties of chromium oxide (Cr&#8322;O&#8323;) nanoparticles</h4>
-            <div class="authors">Jarnail Singh, <strong class="me">Mayank Dotiyal</strong>, Pankaj Bhardwaj, Kaushal Kumar, Prabhakar Bhandari, Vikram Verma</div>
-            <div class="venue">Vol. 69 (2), 193&ndash;198</div>
-          </div>
-          <a href="https://doi.org/10.1016/j.matpr.2022.08.340" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-pub"></span> 2021 &middot; Springer Lecture Notes in Mechanical Engineering</span>
-            <h4>A detailed investigation of structural and optical properties of CTAB assisted Cr&#8322;O&#8323; nanoparticles</h4>
-            <div class="authors">Jarnail Singh, <strong class="me">Mayank Dotiyal</strong>, Pankaj Bhardwaj, Prabhakar Bhandari, Kaushal Kumar, Saurav Dixit, Vikram Verma</div>
-            <div class="venue">Advances in Functional and Smart Materials</div>
-          </div>
-          <a href="https://doi.org/10.1007/978-981-19-4147-4_30" target="_blank" rel="noopener" class="doi-btn">DOI &#8599;</a>
-        </div>
-      </div>
-
-      <div class="pub-group-title">Patents &amp; Intellectual Property</div>
-      <div class="pub-list">
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-pub"></span> 2025 Patent &middot; Indian Patent Office</span>
-            <h4>Method of visibly-transparent heat-insulation coating and coated substrate obtained therefrom</h4>
-            <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Emila Panda</div>
-            <div class="venue">Application No. 202521063654 &middot; Filed 03.07.2025</div>
-          </div>
-          <span class="doi-btn static" style="color: var(--accent);">Filed</span>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-pub"></span> 2025 Patent &middot; Indian Patent Office</span>
-            <h4>A method of fabricating metal-organic framework (MOF) membranes on substrates</h4>
-            <div class="authors">Superb K Misra, Prateek Goyal, Rakesh Behera, <strong class="me">Mayank Dotiyal</strong></div>
-            <div class="venue">Application No. 202521067473 &middot; Filed 15.07.2025</div>
-          </div>
-          <span class="doi-btn static" style="color: var(--accent);">Filed</span>
-        </div>
-
-        <div class="pub-card">
-          <div class="pub-main">
-            <span class="year"><span class="status-dot status-pub"></span> 2023 Patent &middot; Indian Patent Office</span>
-            <h4>A process for thermochromic coating</h4>
-            <div class="authors"><strong class="me">Mayank Dotiyal</strong>, Emila Panda</div>
-            <div class="venue">Application No. 202321024764 &middot; Filed 31.03.2023</div>
-          </div>
-          <span class="doi-btn static" style="color: var(--accent);">Filed</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 05: TECHNICAL ARSENAL -->
-    <section id="arsenal">
-      <div class="section-head">
-        <span class="idx">05</span>
-        <h2>Technical Arsenal &amp; Techniques</h2>
-      </div>
-      <div class="arsenal-grid">
-        <div class="arsenal-category">
-          <h4>Synthesis &amp; Deposition</h4>
-          <div class="badge-cloud">
-            <span class="tech-badge">RF Magnetron Sputtering</span>
-            <span class="tech-badge">Pulsed Laser Deposition (PLD)</span>
-            <span class="tech-badge">Spin Coating</span>
-            <span class="tech-badge">Wet-Chemical Co-Precipitation</span>
-            <span class="tech-badge">Sol-Gel Processing</span>
-          </div>
-        </div>
-
-        <div class="arsenal-category">
-          <h4>Diffraction &amp; Spectroscopy</h4>
-          <div class="badge-cloud">
-            <span class="tech-badge">X-ray Diffraction (XRPD, GI-XRD)</span>
-            <span class="tech-badge">X-Ray Reflectivity (XRR)</span>
-            <span class="tech-badge">X-Ray Photoelectron Spectroscopy (XPS)</span>
-            <span class="tech-badge">UV-Vis-NIR Spectrophotometry</span>
-            <span class="tech-badge">FTIR Spectroscopy</span>
-          </div>
-        </div>
-
-        <div class="arsenal-category">
-          <h4>Microscopy &amp; Transport</h4>
-          <div class="badge-cloud">
-            <span class="tech-badge">TEM / STEM / HRTEM</span>
-            <span class="tech-badge">SEM / EDS Analysis</span>
-            <span class="tech-badge">Atomic Force Microscopy (AFM)</span>
-            <span class="tech-badge">4-Probe Hall Effect</span>
-            <span class="tech-badge">PPMS Transport</span>
-            <span class="tech-badge">Surface Profilometry</span>
-          </div>
-        </div>
-
-        <div class="arsenal-category">
-          <h4>Ab Initio Computation</h4>
-          <div class="badge-cloud">
-            <span class="tech-badge">First-Principles DFT</span>
-            <span class="tech-badge">VASP</span>
-            <span class="tech-badge">Quantum ESPRESSO</span>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="cta-row">
+      <a class="cta-btn primary" href="research.html">Explore Research &rarr;</a>
+      <a class="cta-btn" href="publications.html">View Publications</a>
+      <a class="cta-btn" href="contact.html">Get in Touch</a>
+    </div>
 
   </main>
 </div>
 
-<script>
-  // THE THERMAL STAGE TELEMETRY CONTROLLER
-  const slider = document.getElementById('tempSlider');
-  const readout = document.getElementById('tempReadout');
-  const phaseLabel = document.getElementById('phaseLabel');
-  const bandgap = document.getElementById('metricBandgap');
-  const irTrans = document.getElementById('metricIR');
-  const body = document.body;
-
-  function updateStage() {
-    const temp = parseInt(slider.value, 10);
-    const isMetal = temp >= 68;
-
-    // Update phase theme attributes
-    body.setAttribute('data-phase', isMetal ? 'metal' : 'semiconductor');
-
-    // Update real-time text readouts
-    if (isMetal) {
-      readout.innerHTML = `${temp}&deg;C <span>/ Metallic State</span>`;
-      phaseLabel.innerHTML = 'Tetragonal Rutile (R)';
-      bandgap.innerHTML = '0.00 eV (Conductor)';
-      irTrans.innerHTML = 'Reflected (< 10%)';
-    } else {
-      readout.innerHTML = `${temp}&deg;C <span>/ Semiconducting State</span>`;
-      phaseLabel.innerHTML = 'Monoclinic (M&#8321;)';
-      bandgap.innerHTML = '~0.60 eV';
-      irTrans.innerHTML = 'High (85%)';
-    }
-  }
-
-  slider.addEventListener('input', updateStage);
-  
-  // Smooth scroll links offset for mobile
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
