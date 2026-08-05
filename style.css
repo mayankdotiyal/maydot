@@ -10,11 +10,11 @@
     --text-dim: #8896ac;
     --border: rgba(15, 20, 29, 0.1);
     --border-highlight: rgba(15, 20, 29, 0.25);
-    --accent: #ff7b00;
-    --accent-glow: rgba(255, 123, 0, 0.15);
-    --accent-gradient: linear-gradient(135deg, #ff7b00, #ffba00);
-    --tag-bg: rgba(255, 123, 0, 0.1);
-    --tag-border: rgba(255, 123, 0, 0.3);
+    --accent: #0055ff;
+    --accent-glow: rgba(0, 85, 255, 0.12);
+    --accent-gradient: linear-gradient(135deg, #0055ff, #00d5ff);
+    --tag-bg: rgba(0, 85, 255, 0.08);
+    --tag-border: rgba(0, 85, 255, 0.25);
     --shadow: 0 20px 40px -15px rgba(15, 20, 29, 0.12);
     
     /* Typography */
@@ -37,11 +37,11 @@
     --text-dim: #565d70;
     --border: rgba(255, 255, 255, 0.08);
     --border-highlight: rgba(255, 255, 255, 0.18);
-    --accent: #0055ff;
-    --accent-glow: rgba(0, 85, 255, 0.12);
-    --accent-gradient: linear-gradient(135deg, #0055ff, #00d5ff);
-    --tag-bg: rgba(0, 85, 255, 0.08);
-    --tag-border: rgba(0, 85, 255, 0.25);
+    --accent: #ff7b00;
+    --accent-glow: rgba(255, 123, 0, 0.15);
+    --accent-gradient: linear-gradient(135deg, #ff7b00, #ffba00);
+    --tag-bg: rgba(255, 123, 0, 0.1);
+    --tag-border: rgba(255, 123, 0, 0.3);
     --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
   }
 
