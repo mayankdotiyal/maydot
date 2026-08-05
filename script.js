@@ -1,4 +1,6 @@
 // SHARED SITE SCRIPT — theme persistence + thermal stage telemetry controller
+// Light mode = Semiconducting (Monoclinic) phase, default
+// Dark mode  = Metallic (Rutile) phase
 document.addEventListener('DOMContentLoaded', function () {
   const body = document.body;
   const slider = document.getElementById('tempSlider');
@@ -8,36 +10,38 @@ document.addEventListener('DOMContentLoaded', function () {
   const irTrans = document.getElementById('metricIR');
   const toggle = document.getElementById('themeToggle');
 
-  const STORAGE_KEY = 'siteThemeMode'; // 'dark' | 'light'
+  const STORAGE_KEY = 'siteThemeMode'; // 'light' | 'dark'
 
-  function applyPhase(isLight, opts) {
+  function applyPhase(phase, opts) {
+    // phase: 'semiconductor' (light) or 'metal' (dark)
     opts = opts || {};
-    body.setAttribute('data-phase', isLight ? 'metal' : 'semiconductor');
+    const isMetal = phase === 'metal';
+    body.setAttribute('data-phase', phase);
 
     if (slider && !opts.skipSlider) {
-      slider.value = isLight ? 80 : 25;
+      slider.value = isMetal ? 80 : 25;
     }
 
     if (readout) {
-      const temp = isLight ? 80 : 25;
-      readout.innerHTML = isLight
+      const temp = isMetal ? 80 : 25;
+      readout.innerHTML = isMetal
         ? `${temp}&deg;C <span>/ Metallic State</span>`
         : `${temp}&deg;C <span>/ Semiconducting State</span>`;
     }
     if (phaseLabel) {
-      phaseLabel.innerHTML = isLight ? 'Tetragonal Rutile (R)' : 'Monoclinic (M&#8321;)';
+      phaseLabel.innerHTML = isMetal ? 'Tetragonal Rutile (R)' : 'Monoclinic (M&#8321;)';
     }
     if (bandgap) {
-      bandgap.innerHTML = isLight ? '0.00 eV (Conductor)' : '~0.60 eV';
+      bandgap.innerHTML = isMetal ? '0.00 eV (Conductor)' : '~0.60 eV';
     }
     if (irTrans) {
-      irTrans.innerHTML = isLight ? 'Reflected (&lt; 10%)' : 'High (85%)';
+      irTrans.innerHTML = isMetal ? 'Reflected (&lt; 10%)' : 'High (85%)';
     }
   }
 
-  function saveTheme(isLight) {
+  function saveTheme(isDark) {
     try {
-      localStorage.setItem(STORAGE_KEY, isLight ? 'light' : 'dark');
+      localStorage.setItem(STORAGE_KEY, isDark ? 'dark' : 'light');
     } catch (e) { /* localStorage unavailable — theme just won't persist */ }
   }
 
@@ -49,18 +53,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Initialize from saved preference (defaults to dark if never set)
+  // Initialize from saved preference (defaults to light/semiconductor if never set)
   const saved = loadTheme();
-  const startIsLight = saved === 'light';
-  applyPhase(startIsLight);
+  const startIsDark = saved === 'dark';
+  applyPhase(startIsDark ? 'metal' : 'semiconductor');
 
   // Toggle button — flips + persists the theme site-wide
   if (toggle) {
     toggle.addEventListener('click', function () {
-      const isCurrentlyLight = body.getAttribute('data-phase') === 'metal';
-      const next = !isCurrentlyLight;
-      applyPhase(next);
-      saveTheme(next);
+      const isCurrentlyDark = body.getAttribute('data-phase') === 'metal';
+      const nextIsDark = !isCurrentlyDark;
+      applyPhase(nextIsDark ? 'metal' : 'semiconductor');
+      saveTheme(nextIsDark);
     });
   }
 
@@ -69,9 +73,9 @@ document.addEventListener('DOMContentLoaded', function () {
   if (slider) {
     slider.addEventListener('input', function () {
       const temp = parseInt(slider.value, 10);
-      const isLight = temp >= 68;
-      applyPhase(isLight, { skipSlider: true });
-      saveTheme(isLight);
+      const isMetal = temp >= 68;
+      applyPhase(isMetal ? 'metal' : 'semiconductor', { skipSlider: true });
+      saveTheme(isMetal);
     });
   }
 });

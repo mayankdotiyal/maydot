@@ -1,21 +1,21 @@
 /* Dr. Mayank Dotiyal — shared site stylesheet */
   :root {
-    /* PHASE 1: MONOCLINIC (Deep Vacuum / Infrared Transparent) */
-    --bg: #0c0d12;
-    --bg-panel: #13151d;
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --bg-card-hover: rgba(255, 255, 255, 0.06);
-    --text-main: #f0f2f8;
-    --text-muted: #8c93a8;
-    --text-dim: #565d70;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-highlight: rgba(255, 255, 255, 0.18);
+    /* PHASE 1: MONOCLINIC (Deep Vacuum / Infrared Transparent) — LIGHT, default */
+    --bg: #e6ebf2;
+    --bg-panel: #f3f6fa;
+    --bg-card: rgba(255, 255, 255, 0.7);
+    --bg-card-hover: rgba(255, 255, 255, 0.95);
+    --text-main: #0f141d;
+    --text-muted: #525f75;
+    --text-dim: #8896ac;
+    --border: rgba(15, 20, 29, 0.1);
+    --border-highlight: rgba(15, 20, 29, 0.25);
     --accent: #ff7b00;
     --accent-glow: rgba(255, 123, 0, 0.15);
     --accent-gradient: linear-gradient(135deg, #ff7b00, #ffba00);
     --tag-bg: rgba(255, 123, 0, 0.1);
     --tag-border: rgba(255, 123, 0, 0.3);
-    --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    --shadow: 0 20px 40px -15px rgba(15, 20, 29, 0.12);
     
     /* Typography */
     --font-heading: 'Space Grotesk', -apple-system, sans-serif;
@@ -26,23 +26,23 @@
     --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* PHASE 2: RUTILE (Anodized Silver / Infrared Reflective) */
+  /* PHASE 2: RUTILE (Anodized Silver / Infrared Reflective) — DARK */
   body[data-phase="metal"] {
-    --bg: #e6ebf2;
-    --bg-panel: #f3f6fa;
-    --bg-card: rgba(255, 255, 255, 0.7);
-    --bg-card-hover: rgba(255, 255, 255, 0.95);
-    --text-main: #0f141d;
-    --text-muted: #525f75;
-    --text-dim: #8896ac;
-    --border: rgba(15, 20, 29, 0.1);
-    --border-highlight: rgba(15, 20, 29, 0.25);
+    --bg: #0c0d12;
+    --bg-panel: #13151d;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-card-hover: rgba(255, 255, 255, 0.06);
+    --text-main: #f0f2f8;
+    --text-muted: #8c93a8;
+    --text-dim: #565d70;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-highlight: rgba(255, 255, 255, 0.18);
     --accent: #0055ff;
     --accent-glow: rgba(0, 85, 255, 0.12);
     --accent-gradient: linear-gradient(135deg, #0055ff, #00d5ff);
     --tag-bg: rgba(0, 85, 255, 0.08);
     --tag-border: rgba(0, 85, 255, 0.25);
-    --shadow: 0 20px 40px -15px rgba(15, 20, 29, 0.12);
+    --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -269,13 +269,14 @@
   }
   .pub-group-title:first-of-type { margin-top: 16px; }
   .year-heading {
-    font-family: var(--font-heading); font-size: 20px; font-weight: 700;
-    color: var(--accent); margin: 40px 0 14px; display: flex; align-items: baseline; gap: 10px;
+    font-family: var(--font-heading); font-size: 25px; font-weight: 700;
+    color: var(--accent); margin: 56px 0 24px; display: flex; align-items: baseline; gap: 14px;
   }
-  .year-heading:first-of-type { margin-top: 16px; }
+  .year-heading:first-of-type { margin-top: 20px; }
   .year-heading::after {
     content: ""; flex: 1; height: 1px; background: var(--border);
   }
+  .hidden-section { display: none; }
 
   .pub-list { display: flex; flex-direction: column; gap: 12px; }
   .pub-card {
@@ -332,22 +333,27 @@
 
   /* THEME TOGGLE — fixed top-right, persists via localStorage */
   .theme-toggle {
-    position: fixed; top: 20px; right: 24px; z-index: 200;
-    width: 42px; height: 42px; border-radius: 50%;
-    background: var(--bg-card); border: 1px solid var(--border-highlight);
-    color: var(--text-main); cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    backdrop-filter: blur(8px);
-    transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    position: fixed; top: 20px; right: 24px; z-index: 999;
+    height: 42px; padding: 0 16px 0 14px; border-radius: 21px;
+    background: var(--text-main); border: 1px solid var(--text-main);
+    color: var(--bg); cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: 0.3px;
+    box-shadow: 0 6px 20px -6px rgba(0,0,0,0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
-  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-  .theme-toggle svg { width: 19px; height: 19px; position: absolute; transition: opacity 0.25s ease, transform 0.25s ease; }
-  .theme-toggle .icon-sun { opacity: 0; transform: rotate(-40deg) scale(0.7); }
-  .theme-toggle .icon-moon { opacity: 1; transform: rotate(0) scale(1); }
-  body[data-phase="metal"] .theme-toggle .icon-sun { opacity: 1; transform: rotate(0) scale(1); }
-  body[data-phase="metal"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(40deg) scale(0.7); }
+  .theme-toggle:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -6px rgba(0,0,0,0.4); }
+  .theme-toggle .icon-wrap { position: relative; width: 18px; height: 18px; flex: 0 0 auto; }
+  .theme-toggle svg { width: 18px; height: 18px; position: absolute; top: 0; left: 0; transition: opacity 0.25s ease, transform 0.25s ease; }
+  .theme-toggle .icon-sun { opacity: 1; transform: rotate(0) scale(1); }
+  .theme-toggle .icon-moon { opacity: 0; transform: rotate(40deg) scale(0.7); }
+  body[data-phase="metal"] .theme-toggle .icon-sun { opacity: 0; transform: rotate(-40deg) scale(0.7); }
+  body[data-phase="metal"] .theme-toggle .icon-moon { opacity: 1; transform: rotate(0) scale(1); }
+  .theme-toggle .toggle-label::after { content: "Light"; }
+  body[data-phase="metal"] .theme-toggle .toggle-label::after { content: "Dark"; }
   @media (max-width: 600px) {
-    .theme-toggle { top: 14px; right: 14px; width: 38px; height: 38px; }
+    .theme-toggle { top: 14px; right: 14px; height: 38px; padding: 0 14px 0 12px; }
+    .theme-toggle .toggle-label { display: none; }
   }
 
   /* ==========================================================================
